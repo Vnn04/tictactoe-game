@@ -20,8 +20,11 @@ class Board:
     def draw(self, screen):
         # draw vertical lines
         for x in self.vertical_line:
-            pygame.draw.line(screen, GREEN, (x, 0), (x, HEIGHT), 1)
+            pygame.draw.line(screen, INDIANRED, (x, 0), (x, HEIGHT), 1)
         
         # draw horizontal lines
         for y in self.horizontal_line:
-            pygame.draw.line(screen, GREEN, (0, y), (WIDTH, y), 1)
+            pygame.draw.line(screen, INDIANRED, (0, y), (WIDTH, y), 1)
+
+    def click(self, pos):
+        x, y = pos
