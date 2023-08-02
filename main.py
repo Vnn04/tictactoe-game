@@ -19,6 +19,9 @@ class Main:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    self.pos = pygame.mouse.get_pos()
+                    self.board.click(self.pos, self.screen)
                 
                 # draw board game
                 self.board.draw(self.screen)

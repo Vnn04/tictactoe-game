@@ -7,3 +7,4 @@ ROWS = 30
 GREEN = (124,252,0)
 BLACK = (0, 0, 0)
 INDIANRED = (205, 92, 92)	
+YELLOW = (255, 255, 0)

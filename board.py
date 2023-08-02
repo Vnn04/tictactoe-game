@@ -26,5 +26,8 @@ class Board:
         for y in self.horizontal_line:
             pygame.draw.line(screen, INDIANRED, (0, y), (WIDTH, y), 1)
 
-    def click(self, pos):
-        x, y = pos
+    def click(self, pos, screen):
+        x, y = pos[0]//COLS, pos[1]//ROWS
+        pygame.draw.line(screen, YELLOW, (x * COLS, y * ROWS), (x * COLS + WIDTH/COLS, y * ROWS + HEIGHT/ROWS))
+        pygame.draw.line(screen, YELLOW, (x * COLS + WIDTH/COLS, y * ROWS), (x * COLS, y * ROWS + HEIGHT/ROWS))
+
