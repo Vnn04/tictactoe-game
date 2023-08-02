@@ -10,7 +10,7 @@ class Main:
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         pygame.display.set_caption("Checkerboard game")
         self.board = Board()
-        self.player = 1 # 1 or 0
+        self.player = 1 # 1 or -1
 
     def mainloop(self):
 
@@ -23,10 +23,12 @@ class Main:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     self.pos = pygame.mouse.get_pos()
                     if self.board.click(self.pos, self.screen, self.player):
-                        self.player = 1 if self.player == 0 else 0
+                        self.player = 1 if self.player == -1 else -1
 
                 # draw board game
                 self.board.draw(self.screen)
+                self.board.show_board()
+                print('----------------------------')
             
             pygame.display.update()
 

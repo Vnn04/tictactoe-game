@@ -1,13 +1,14 @@
 import pygame
 
 from const import *
-# init 2D array
-board = [[-1 for j in range(30)] for i in range(30)]
+
 
 class Board:
     def __init__(self):
         self.vertical_line = []
         self.horizontal_line = []
+        # init 2D array
+        self.board_check = [[0 for j in range(30)] for i in range(30)]
 
         # get all vertical line position in the board
         for i in range(COLS):
@@ -28,21 +29,26 @@ class Board:
         for y in self.horizontal_line:
             pygame.draw.line(screen, INDIANRED, (0, y), (WIDTH, y), 1)
 
+    def in_check(self):
+        pass
+
     def click(self, pos, screen, player):
         if 0 <= pos[0] <= 900 and 0 <= pos[1] <= 900:
             x, y = pos[0]//COLS, pos[1]//ROWS
-            if player == 1 and board[x][y] == -1:
-                print(x," ",y)
+            if player == 1 and self.board_check[x][y] == 0:
+                self.board_check[x][y] = 1
                 pygame.draw.line(screen, YELLOW, (x * COLS, y * ROWS),
                                  (x * COLS + WIDTH/COLS, y * ROWS + HEIGHT/ROWS), 2)
                 pygame.draw.line(screen, YELLOW, (x * COLS + WIDTH/COLS,
                                  y * ROWS), (x * COLS, y * ROWS + HEIGHT/ROWS), 2)
-                board[x][y] = player
-            elif player == 0 and board[x][y] == -1:
-                print(x," ",y)
+                self.board_check[x][y] = player
+            elif player == -1 and self.board_check[x][y] == 0:
+                self.board_check[x][y] = -1
                 pygame.draw.circle(screen, YELLOW, (x * COLS + (WIDTH/COLS)/2,
                                    y * ROWS + (HEIGHT/ROWS)/2), (WIDTH/COLS)/2 - 2, 2)
-                board[x][y] = player
+                self.board_check[x][y] = player
             return True
         return False
     
+    def show_board(self):
+        print(self.board_check)
