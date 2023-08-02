@@ -26,8 +26,14 @@ class Board:
         for y in self.horizontal_line:
             pygame.draw.line(screen, INDIANRED, (0, y), (WIDTH, y), 1)
 
-    def click(self, pos, screen):
-        x, y = pos[0]//COLS, pos[1]//ROWS
-        pygame.draw.line(screen, YELLOW, (x * COLS, y * ROWS), (x * COLS + WIDTH/COLS, y * ROWS + HEIGHT/ROWS))
-        pygame.draw.line(screen, YELLOW, (x * COLS + WIDTH/COLS, y * ROWS), (x * COLS, y * ROWS + HEIGHT/ROWS))
+    def click(self, pos, screen, player):
+        if 0 <= pos[0] <= 900 and 0 <= pos[1] <= 900:
+            x, y = pos[0]//COLS, pos[1]//ROWS
+            if player == 1:
+                pygame.draw.line(screen, YELLOW, (x * COLS, y * ROWS), (x * COLS + WIDTH/COLS, y * ROWS + HEIGHT/ROWS), 2)
+                pygame.draw.line(screen, YELLOW, (x * COLS + WIDTH/COLS, y * ROWS), (x * COLS, y * ROWS + HEIGHT/ROWS), 2)
+            else:
+                pygame.draw.circle(screen, YELLOW, (x * COLS + (WIDTH/COLS)/2, y * ROWS + (HEIGHT/ROWS)/2), (WIDTH/COLS)/2 - 2, 2)
+            return True
+        return False
 
