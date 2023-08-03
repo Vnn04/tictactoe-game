@@ -28,9 +28,6 @@ class Board:
         for y in self.horizontal_line:
             pygame.draw.line(screen, INDIANRED, (0, y), (WIDTH, y), 1)
 
-    def in_check(self):
-        pass
-
     def click(self, pos, screen, player):
         if 0 <= pos[0] <= 900 and 0 <= pos[1] <= 900:
             x, y = pos[0]//COLS, pos[1]//ROWS
@@ -47,5 +44,41 @@ class Board:
             return True
         return False
     
-    def show_board(self):
-        print(self.board_check)
+    def check(self, array):
+        test = array[0]
+        if test == 0:
+            return False
+        for i in range(1, len(array)):
+            if array[i] != test:
+                return False
+        return True
+
+    def check_five_in_a_row(self):
+        rows = len(self.board_check)
+        cols = len(self.board_check[0])
+
+        for i in range(rows):
+            for j in range(cols-4):
+                subarray = self.board_check[i][j:j+5] 
+                if self.check(subarray):
+                    return True
+                
+        for i in range(rows - 4):
+            for j in range(cols):
+                subarray = [self.board_check[i+k][j] for k in range(5)]
+                if self.check(subarray):
+                    return True
+                
+        for i in range(rows - 4):
+            for j in range(cols - 4):
+                subarray = [self.board_check[i+k][j+k] for k in range(5)]
+                if self.check(subarray):
+                    return True
+                
+        for i in range(rows - 4):
+            for j in range(4, cols):
+                subarray = [self.board_check[i+k][j-k] for k in range(5)]
+                if self.check(subarray):
+                    return True
+        
+        return False

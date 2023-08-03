@@ -27,9 +27,9 @@ class Main:
 
                 # draw board game
                 self.board.draw(self.screen)
-                self.board.show_board()
-                print('----------------------------')
-            
+                if self.board.check_five_in_a_row():
+                    print(True)
+                    sys.exit()            
             pygame.display.update()
 
 main = Main()
