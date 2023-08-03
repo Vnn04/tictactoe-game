@@ -31,14 +31,16 @@ class Board:
     def click(self, pos, screen, player):
         if 0 <= pos[0] <= 900 and 0 <= pos[1] <= 900:
             x, y = pos[0]//COLS, pos[1]//ROWS
-            if player == 1 and self.board_check[x][y] == 0:
-                self.board_check[y][x] = 1000
+            if self.board_check[x][y] != 0:
+                return False
+            if player == 1:
+                self.board_check[x][y] = 1
                 pygame.draw.line(screen, YELLOW, (x * COLS, y * ROWS),
                                  (x * COLS + WIDTH/COLS, y * ROWS + HEIGHT/ROWS), 2)
                 pygame.draw.line(screen, YELLOW, (x * COLS + WIDTH/COLS,
                                  y * ROWS), (x * COLS, y * ROWS + HEIGHT/ROWS), 2)
-            elif player == -1 and self.board_check[x][y] == 0:
-                self.board_check[y][x] = -1000
+            elif player == -1:
+                self.board_check[x][y] = -1
                 pygame.draw.circle(screen, YELLOW, (x * COLS + (WIDTH/COLS)/2,
                                    y * ROWS + (HEIGHT/ROWS)/2), (WIDTH/COLS)/2 - 2, 2)
             return True
