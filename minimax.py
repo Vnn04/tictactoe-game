@@ -24,7 +24,7 @@ class MinimaxRoot:
         return empty_cells
     
     def minimax(self, depth, maximizing_player, player):
-        if depth == 0 or not (self.game_state):
+        if depth == 0 or self.game_state:
             return self.evaluate(player)
         
         if maximizing_player:
@@ -66,4 +66,4 @@ class MinimaxRoot:
             if eval > best_eval:
                 best_eval = eval
                 best_move = (i, j)
-        return best_move
+        return best_move 

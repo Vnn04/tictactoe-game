@@ -1,8 +1,8 @@
 HEIGHT = 900
 WIDTH = 900
 
-COLS = 30
-ROWS = 30
+COLS = 3
+ROWS = 3
 
 GREEN = (124,252,0)
 BLACK = (0, 0, 0)
