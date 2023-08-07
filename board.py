@@ -30,22 +30,28 @@ class Board:
         # draw horizontal lines
         for y in self.horizontal_line:
             pygame.draw.line(screen, INDIANRED, (0, y), (WIDTH, y), 1)
-
-    def click(self, pos, screen, player):
+    
+    def player_move(self, pos, screen):
         if 0 <= pos[0] <= 900 and 0 <= pos[1] <= 900:
             x, y = pos[0]//self.col_size, pos[1]//self.row_size
             if self.board_check[x][y] != 0:
                 return False
-            if player == -1:
-                self.board_check[x][y] = player
-                pygame.draw.line(screen, YELLOW, (x * self.col_size, y * self.row_size),
-                                 (x * self.col_size + self.col_size, y * self.row_size + self.row_size), 2)
-                pygame.draw.line(screen, YELLOW, (x * self.col_size + self.col_size,
-                                 y * self.row_size), (x * self.col_size, y * self.row_size + self.row_size), 2)
-            elif player == 1:
-                self.board_check[x][y] = player
-                pygame.draw.circle(screen, YELLOW, (x * self.col_size + (self.col_size)/2,
-                                   y * self.row_size + (self.row_size)/2), (self.col_size)/2 - 2, 2)
+            self.board_check[x][y] = -1
+            pygame.draw.line(screen, YELLOW, (x * self.col_size, y * self.row_size),
+                                (x * self.col_size + self.col_size, y * self.row_size + self.row_size), 2)
+            pygame.draw.line(screen, YELLOW, (x * self.col_size + self.col_size,
+                                y * self.row_size), (x * self.col_size, y * self.row_size + self.row_size), 2)
+            return True
+        return False
+    
+    def ai_move(self, pos, screen):
+        if 0 <= pos[0] <= 900 and 0 <= pos[1] <= 900:
+            x, y = pos[0]//self.col_size, pos[1]//self.row_size
+            if self.board_check[x][y] != 0:
+                return False
+            self.board_check[x][y] = 1
+            pygame.draw.circle(screen, YELLOW, (x * self.col_size + (self.col_size)/2,
+                                y * self.row_size + (self.row_size)/2), (self.col_size)/2 - 2, 2)
             return True
         return False
     
@@ -88,7 +94,7 @@ class Board:
         
     #     return False
 
-    def check_three_in_a_row(self):
+    def check_three_in_a_row(self, player):
         rows = len(self.board_check)
         cols = len(self.board_check[0])
 
