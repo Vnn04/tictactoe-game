@@ -36,14 +36,14 @@ class Board:
             x, y = pos[0]//self.col_size, pos[1]//self.row_size
             if self.board_check[x][y] != 0:
                 return False
-            if player == 1:
-                self.board_check[x][y] = 1
+            if player == -1:
+                self.board_check[x][y] = player
                 pygame.draw.line(screen, YELLOW, (x * self.col_size, y * self.row_size),
                                  (x * self.col_size + self.col_size, y * self.row_size + self.row_size), 2)
                 pygame.draw.line(screen, YELLOW, (x * self.col_size + self.col_size,
                                  y * self.row_size), (x * self.col_size, y * self.row_size + self.row_size), 2)
-            elif player == -1:
-                self.board_check[x][y] = -1
+            elif player == 1:
+                self.board_check[x][y] = player
                 pygame.draw.circle(screen, YELLOW, (x * self.col_size + (self.col_size)/2,
                                    y * self.row_size + (self.row_size)/2), (self.col_size)/2 - 2, 2)
             return True
