@@ -2,14 +2,15 @@ import pygame
 
 from const import *
 from board import Board
+from ai import AI
 
 class Game:
     def __init__(self, surface):
         self.board = Board()
-        # self.ai = AI()
+        self.ai = AI()
         self.show_lines(surface)
         self.player = 1
-        self.gamemode = 'pvp' # pvp or ai
+        self.gamemode = 'ai' # pvp or ai
         self.running = True
         self.surface = surface
 

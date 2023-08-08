@@ -3,6 +3,7 @@ import pygame
 
 from const import *
 from game import Game
+from ai import AI
 
 # pygame
 pygame.init()
@@ -14,6 +15,7 @@ def main():
     
     game = Game(screen)
     board = game.board
+    ai = game.ai
 
     # main loop
     while True:
@@ -32,6 +34,16 @@ def main():
                     board.mark_sqr(row, col, game.player)
                     game.draw_fig(row, col)
                     game.next_turn()
+
+        if game.gamemode == 'ai' and game.player == ai.player:
+            # update the screen
+            pygame.display.update()
+
+            # ai methods
+            row, col = ai.eval(board)
+            board.mark_sqr(row, col, ai.player)
+            game.draw_fig(row, col)
+            game.next_turn()
 
 
         pygame.display.update()
