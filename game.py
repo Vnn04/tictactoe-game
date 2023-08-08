@@ -6,8 +6,11 @@ from board import Board
 class Game:
     def __init__(self, surface):
         self.board = Board()
+        # self.ai = AI()
         self.show_lines(surface)
         self.player = 1
+        self.gamemode = 'pvp' # pvp or ai
+        self.running = True
         self.surface = surface
 
     def show_lines(self, surface):
