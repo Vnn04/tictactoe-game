@@ -1,3 +1,4 @@
+
 WIDTH = 600
 HEIGHT = 600
 
@@ -13,7 +14,6 @@ CROSS_WIDTH = 20
 RADIUS = SQSIZE // 4
 
 OFFSET = 50
-
 
 # color
 BG_COLOR = (28, 170, 156)

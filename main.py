@@ -30,21 +30,37 @@ def main():
                 row = pos[1] // SQSIZE
                 col = pos[0] // SQSIZE
 
-                if board.empty_sqr(row, col):
-                    board.mark_sqr(row, col, game.player)
-                    game.draw_fig(row, col)
-                    game.next_turn()
+                if board.empty_sqr(row, col) and game.can_choose:
+                    game.make_move(row, col)
 
-        if game.gamemode == 'ai' and game.player == ai.player:
+                    if game.is_over():
+                        game.running = False
+            
+            if event.type == pygame.KEYDOWN:
+                # 0-random ai
+                if event.key == pygame.K_0:
+                    ai.level = 0
+                # 1-random ai
+                elif event.key == pygame.K_1:
+                    ai.level = 1
+                # r-reset game
+                elif event.key == pygame.K_r:
+                    game.reset()
+                    board = game.board
+                    ai = game.ai
+
+
+        if game.player == ai.player and game.running:
             # update the screen
             pygame.display.update()
 
             # ai methods
             row, col = ai.eval(board)
-            board.mark_sqr(row, col, ai.player)
-            game.draw_fig(row, col)
-            game.next_turn()
+            game.make_move(row, col)
 
+            if game.is_over():
+                game.show_win()
+                game.running = False
 
         pygame.display.update()
 
