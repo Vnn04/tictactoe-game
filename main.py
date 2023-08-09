@@ -1,9 +1,12 @@
 import sys
 import pygame
+import time
+import threading
 
 from const import *
 from game import Game
 from ai import AI
+from menu import Menu
 
 # pygame
 pygame.init()
@@ -12,6 +15,9 @@ pygame.display.set_caption('Tic tac toe')
 screen.fill(BG_COLOR)
 
 def main():
+
+    menu = Menu(screen)
+    menu.show()
     
     game = Game(screen)
     board = game.board
@@ -57,6 +63,7 @@ def main():
             # ai methods
             row, col = ai.eval(board)
             game.make_move(row, col)
+
 
             if game.is_over():
                 game.show_win()

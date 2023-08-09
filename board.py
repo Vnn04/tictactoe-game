@@ -74,3 +74,10 @@ class Board:
     
     def is_empty(self):
         return self.mark_sqrs == 0
+    
+    def winner(self):
+        if self.final_state() != 0:
+            return self.final_state()
+        if self.is_full():
+            return 0
+        return None
